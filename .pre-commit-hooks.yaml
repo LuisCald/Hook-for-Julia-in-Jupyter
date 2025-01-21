@@ -23,7 +23,6 @@
             if cell["cell_type"] == "code" 
                 # Format the code in the cell
                 formatted_code = format_text(join(cell["source"]), BlueStyle())
-                cell["source"] = split(formatted_code, '\n')
             end
         end
 
