@@ -30,6 +30,17 @@ function format_notebook(file)
     println("Formatted notebook: $file")
 end
 
+# - repo: https://github.com/LuisCald/Hook-for-Julia-in-Jupyter
+# rev: v0.01
+# hooks:
+# - id: jupyter-julia-format
+#   args: [--project=.]
+
+# - repo: https://github.com/kynan/nbstripout
+# rev: 0.8.1
+# hooks:
+# - id: nbstripout
+
 # # Apply formatting to a specific notebook
 # format_notebook("/Users/lc/Desktop/Desktop_folder/BASEforHANK/BASEtoolbox.jl/examples/ss_comparative_statics/steady_state_comparative_statics_copy.ipynb")
 
