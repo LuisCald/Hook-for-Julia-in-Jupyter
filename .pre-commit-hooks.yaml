@@ -16,7 +16,7 @@
         catch e
             println("Error parsing JSON file: $file")
             println("Reason: ", e)
-            return
+            exit(1)
         end
 
         for cell in notebook["cells"]
@@ -36,7 +36,7 @@
     # Run the formatter on the provided file
     if length(ARGS) > 0
         format_notebook(ARGS[1])
-        exit(1)
+        exit(0)
     else
         println("No file provided to format.")
         exit(0)
