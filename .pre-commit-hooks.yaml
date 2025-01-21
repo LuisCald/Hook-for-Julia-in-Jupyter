@@ -22,7 +22,7 @@
         for cell in notebook["cells"]
             if cell["cell_type"] == "code" 
                 # Format the code in the cell
-                formatted_code = format_text(join(cell["source"]), BlueStyle())
+                cell["source"] = format_text(join(cell["source"]), BlueStyle())
             end
         end
 
