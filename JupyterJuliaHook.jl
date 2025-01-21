@@ -16,6 +16,10 @@ function format_notebook(file)
         if cell["cell_type"] == "code" 
             # Format the code in the cell
             cell["source"] = format_text(join(cell["source"]), BlueStyle())
+            cell["source"] = convert.(String, cell["source"])
+            for (i,j) in enumerate(cell["source"])
+                cell["source"][i] = j * "\n"
+            end
         end
     end
 
@@ -35,8 +39,12 @@ if length(ARGS) > 0
 else
     println("No file provided to format.")
 end
-# cell["source"] = replace(formatted_code, r"\n" => r"\n ")
+notebook = JSON.parsefile("/Users/lc/Desktop/Desktop_folder/BASEforHANK/BASEtoolbox.jl/examples/ss_comparative_statics/steady_state_comparative_statics_copy.ipynb")
+
 b = format_text(a, BlueStyle())
+open("/Users/lc/Desktop/Desktop_folder/BASEforHANK/BASEtoolbox.jl/examples/ss_comparative_statics/test.ipynb", "w") do io
+    JSON.print(io, notebook)
+end
 c = replace(b, r"\n" => r"\n ")
 c = split(c, '\n')
 a = join([

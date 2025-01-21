@@ -19,12 +19,16 @@
             exit(1)
         end
 
-        for cell in notebook["cells"]
-            if cell["cell_type"] == "code" 
-                # Format the code in the cell
-                cell["source"] = format_text(join(cell["source"]), BlueStyle())
-            end
-        end
+      for cell in notebook["cells"]
+          if cell["cell_type"] == "code" 
+              # Format the code in the cell
+              cell["source"] = format_text(join(cell["source"]), BlueStyle())
+              cell["source"] = convert.(String, cell["source"])
+              for (i,j) in enumerate(cell["source"])
+                  cell["source"][i] = j * "\n"
+              end
+          end
+      end
 
         # Save the formatted notebook
         open(file, "w") do io
