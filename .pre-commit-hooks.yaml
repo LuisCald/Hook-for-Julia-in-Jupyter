@@ -22,8 +22,9 @@
       for cell in notebook["cells"]
           if cell["cell_type"] == "code" 
               # Format the code in the cell
-              cell["source"] = format_text(join(cell["source"]), BlueStyle())
-              cell["source"] = convert.(String, cell["source"])
+              formatted_code = format_text(join(cell["source"]), BlueStyle())
+              split_code = split(formatted_code, '\n')
+              cell["source"] = convert.(String, split_code)
               for (i,j) in enumerate(cell["source"])
                   cell["source"][i] = j * "\n"
               end

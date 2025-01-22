@@ -15,8 +15,9 @@ function format_notebook(file)
     for cell in notebook["cells"]
         if cell["cell_type"] == "code" 
             # Format the code in the cell
-            cell["source"] = format_text(join(cell["source"]), BlueStyle())
-            cell["source"] = convert.(String, cell["source"])
+            formatted_code = format_text(join(cell["source"]), BlueStyle())
+            split_code = split(formatted_code, '\n')
+            cell["source"] = convert.(String, split_code)
             for (i,j) in enumerate(cell["source"])
                 cell["source"][i] = j * "\n"
             end
@@ -41,8 +42,8 @@ end
 # hooks:
 # - id: nbstripout
 
-# # Apply formatting to a specific notebook
-# format_notebook("/Users/lc/Desktop/Desktop_folder/BASEforHANK/BASEtoolbox.jl/examples/ss_comparative_statics/steady_state_comparative_statics_copy.ipynb")
+# Apply formatting to a specific notebook
+format_notebook("/Users/lc/Desktop/Desktop_folder/BASEforHANK/BASEtoolbox.jl/examples/ss_comparative_statics/steady_state_comparative_statics_copy.ipynb")
 
 # Run the formatter on the provided file
 if length(ARGS) > 0
@@ -57,7 +58,7 @@ open("/Users/lc/Desktop/Desktop_folder/BASEforHANK/BASEtoolbox.jl/examples/ss_co
     JSON.print(io, notebook)
 end
 c = replace(b, r"\n" => r"\n ")
-c = split(c, '\n')
+c = split(b, '\n')
 a = join([
     "\"\"\"\n",
     "Mainboard for running comparative statics of steady-state block of the BASEforHANK package.\n",
